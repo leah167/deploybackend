@@ -6,13 +6,12 @@ router.get("/", function (req, res, next) {
   res.render("index", { title: "Express" });
 });
 
-router.post("/post-message", async (req, res, next) => {
+router.post("/post-message", async (req, res) => {
   try {
     const dateTime = new Date();
     const clientMessage = req.body.clientMessage;
-    res.json(
-      `Received client message: ${clientMessage}. Responded at ${dateTime.toString()}`
-    );
+    const response = `Recieved client message: ${clientMessage}. Responded at ${dateTime.toString()}`;
+    res.json({ serverMessage: response }).status(200);
   } catch (error) {
     res.json({ success: false }).status(500);
   }
