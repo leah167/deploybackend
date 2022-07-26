@@ -10,7 +10,7 @@ router.post("/post-message", async (req, res) => {
   try {
     const dateTime = new Date();
     const clientMessage = req.body.clientMessage;
-    const response = `Recieved client message: ${clientMessage}. Responded at ${dateTime.toString()}`;
+    const response = `Received client message: ${clientMessage}. Responded at ${dateTime.toString()}`;
     res.json({ serverMessage: response }).status(200);
   } catch (error) {
     res.json({ success: false }).status(500);
