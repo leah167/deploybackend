@@ -11,15 +11,6 @@ const userList = [
   },
 ];
 
-const userList = [
-  {
-    id: 1,
-    firstName: "John",
-    lastName: "Doe",
-    email: "jd@gmail.com",
-  },
-];
-
 /* GET home page. */
 router.get("/", function (req, res) {
   res.render("index", { title: "Express" });
