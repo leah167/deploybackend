@@ -1,5 +1,15 @@
 var express = require("express");
 var router = express.Router();
+const { uuid } = require("uuidv4");
+
+const userList = [
+  {
+    id: 1,
+    firstName: "John",
+    lastName: "Doe",
+    email: "jd@gmail.com",
+  },
+];
 
 const userList = [
   {
@@ -11,19 +21,20 @@ const userList = [
 ];
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", function (req, res) {
   res.render("index", { title: "Express" });
 });
 
-router.post("/post-message", async (req, res) => {
-  try {
-    const dateTime = new Date();
-    const clientMessage = req.body.clientMessage;
-    const response = `Received client message: ${clientMessage}. Responded at ${dateTime.toString()}`;
-    res.json({ serverMessage: response }).status(200);
-  } catch (error) {
-    res.json({ success: false }).status(500);
-  }
+router.get("/get-users", function (req, res, next) {
+  res.json(userList);
+});
+
+router.post("/post-message", function (req, res, next) {
+  const clientMessage = req.body.clientMessage;
+  const dateTime = new Date();
+  res.json(
+    `Received client message: ${clientMessage}. Responded at ${dateTime.toString()}`
+  );
 });
 
 router.post("/create-user", async (req, res, next) => {
@@ -46,4 +57,5 @@ router.post("/create-user", async (req, res, next) => {
     res.status(500).json({ message: "Error adding user." + e, success: false });
   }
 });
+
 module.exports = router;
